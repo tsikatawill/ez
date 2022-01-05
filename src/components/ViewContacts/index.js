@@ -6,16 +6,19 @@ import { apiURL } from "../apiURL";
 const ViewContacts = () => {
   const [contacts, setContacts] = React.useState([]);
 
-  React.useEffect(async () => {
-    let response = await fetch(apiURL);
-    let data = await response.json();
-    if (response.status < 300) {
-      if (data.length > 0) {
-        setContacts(data);
+  React.useEffect(
+    () => async () => {
+      let response = await fetch(apiURL);
+      let data = await response.json();
+      if (response.status < 300) {
+        if (data.length > 0) {
+          setContacts(data);
+        }
+        console.log(contacts);
       }
-      console.log(contacts);
-    }
-  }, []);
+    },
+    []
+  );
 
   return (
     <div className="container py-5">
@@ -69,7 +72,7 @@ const ContactCard = ({ name, phone_number }) => {
         border: "1px solid var(--accent-yellow)",
       }}
     >
-      <img src={Avatar} alt="contact-image" width="70px" />
+      <img src={Avatar} alt="contact" width="70px" />
       <div className="text text-dark text-start mx-3">
         <strong>{name}</strong>
         <br />

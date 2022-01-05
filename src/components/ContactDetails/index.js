@@ -13,14 +13,15 @@ const ContactDetails = () => {
   const { id } = useParams();
   const [contacts, setContacts] = React.useState([]);
 
-  const getContacts = async () => {
-    let response = await fetch(apiURL);
-    let data = await response.json();
-    setContacts(data);
-    console.log(contacts);
-  };
-
-  React.useEffect(getContacts, []);
+  React.useEffect(
+    () => async () => {
+      let response = await fetch(apiURL);
+      let data = await response.json();
+      setContacts(data);
+      console.log(contacts);
+    },
+    []
+  );
 
   const deleteContact = async () => {
     let newList = contacts.filter((item) => item.id !== contact.id);
@@ -35,15 +36,16 @@ const ContactDetails = () => {
     modal.classList.toggle("active");
   };
 
-  const getContact = async () => {
-    setLoading(true);
-    let response = await fetch(`${apiURL}/${id}`);
-    let data = await response.json();
-    setContact(data);
-    setLoading(false);
-  };
-
-  React.useEffect(getContact, []);
+  React.useEffect(
+    () => async () => {
+      setLoading(true);
+      let response = await fetch(`${apiURL}/${id}`);
+      let data = await response.json();
+      setContact(data);
+      setLoading(false);
+    },
+    []
+  );
   return (
     <div className="container py-5">
       <div className="section-header text-center">

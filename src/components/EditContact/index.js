@@ -9,20 +9,23 @@ const EditContact = () => {
     phone_number: "",
   });
 
-  React.useEffect(async () => {
-    let url = `${apiURL}/${id}`;
-    let response = await fetch(url);
-    let data = await response.json();
-    setContact(data);
-    let name = document.getElementById("name");
-    let phone_number = document.getElementById("phone_number");
-    name.value = data.name;
-    phone_number.value = data.phone_number;
-    return {
-      name: data.name,
-      phone_number: data.name,
-    };
-  }, []);
+  React.useEffect(
+    () => async () => {
+      let url = `${apiURL}/${id}`;
+      let response = await fetch(url);
+      let data = await response.json();
+      setContact(data);
+      let name = document.getElementById("name");
+      let phone_number = document.getElementById("phone_number");
+      name.value = data.name;
+      phone_number.value = data.phone_number;
+      return {
+        name: data.name,
+        phone_number: data.name,
+      };
+    },
+    []
+  );
 
   const handleChange = (e) => {
     if (e) {
