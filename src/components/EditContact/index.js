@@ -9,7 +9,7 @@ const EditContact = () => {
     phone_number: "",
   });
 
-  const getContact = async () => {
+  React.useEffect(async () => {
     let url = `${apiURL}/${id}`;
     let response = await fetch(url);
     let data = await response.json();
@@ -22,9 +22,7 @@ const EditContact = () => {
       name: data.name,
       phone_number: data.name,
     };
-  };
-
-  React.useEffect(getContact, []);
+  }, []);
 
   const handleChange = (e) => {
     if (e) {
@@ -32,7 +30,7 @@ const EditContact = () => {
       const value = e.target.value;
       setContact({ ...contact, [name]: value });
     } else {
-      setContact(getContact());
+      setContact(contact);
     }
   };
 
