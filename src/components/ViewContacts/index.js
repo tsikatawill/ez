@@ -6,17 +6,15 @@ import { apiURL } from "../apiURL";
 const ViewContacts = () => {
   const [contacts, setContacts] = React.useState([]);
 
-  React.useEffect(() => {
-    async () => {
-      let response = await fetch(apiURL);
-      let data = await response.json();
-      if (response.status < 300) {
-        if (data.length > 0) {
-          setContacts(data);
-        }
-        console.log(contacts);
+  React.useEffect(async () => {
+    let response = await fetch(apiURL);
+    let data = await response.json();
+    if (response.status < 300) {
+      if (data.length > 0) {
+        setContacts(data);
       }
-    };
+      console.log(contacts);
+    }
   }, []);
 
   return (
