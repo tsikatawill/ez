@@ -1,1 +1,1 @@
-export const apiURL = "https://alldb-api.herokuapp.com";
+export const apiURL = "https://alldb-api.herokuapp.com/contacts";
