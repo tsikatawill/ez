@@ -1,0 +1,28 @@
+.wrapper {
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+/* .wrapper {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+}
+
+.wrapper > div.half {
+  flex: 1;
+  height: 100%;
+  align-items: center;
+}
+
+div.bg {
+  background: url(../images/bg1.jpg) center center/cover no-repeat;
+  color: white;
+}
+
+@media screen and(max-width:767px) {
+  .wrapper {
+    display: none;
+    flex-direction: column;
+  }
+} */

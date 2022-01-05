@@ -1,0 +1,125 @@
+.dashboard {
+  display: flex;
+}
+
+.dashboard .menu {
+  width: fit-content;
+  height: 100vh;
+  position: absolute;
+  z-index: 1000;
+}
+
+.dashboard .menu.closed {
+  position: relative;
+}
+
+.dashboard .menu .logo img {
+  display: block;
+}
+
+.dashboard .logo-placeholder {
+  display: none;
+  font-size: 2rem;
+  font-weight: bolder;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--accent-yellow);
+}
+
+.dashboard .menu.closed .logo img {
+  display: none;
+}
+.dashboard .menu.closed .logo-placeholder {
+  display: block;
+}
+
+.dashboard .menu ul {
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard .menu li {
+  transition: all 0.4s ease;
+  padding: 0.7rem 0;
+}
+
+.dashboard button.menu-toggle {
+  color: var(--accent-yellow);
+  position: absolute;
+  right: -50px;
+  top: 5px;
+}
+
+.dashboard .menu li:hover {
+  padding-left: 1.2rem;
+  border-bottom: 2px solid var(--accent-yellow);
+}
+
+.dashboard .menu li {
+  display: flex;
+  align-items: center;
+  padding: 0.7rem;
+  margin: 1rem 0;
+  cursor: pointer;
+}
+
+.dashboard .menu li a {
+  color: white;
+}
+
+.dashboard .menu li a:hover {
+  color: white;
+}
+
+.dashboard .menu li i {
+  transition: all 0.3s ease;
+  margin-right: 15px;
+  font-size: 1rem;
+}
+
+.dashboard .menu li:hover i {
+  color: var(--accent-yellow);
+}
+
+.dashboard .menu .text {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.dashboard .menu.closed .text {
+  display: none;
+}
+
+.dashboard .menu.closed ul {
+  width: fit-content;
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard .menu.closed li i {
+  padding: 0;
+  margin: 0;
+}
+
+@media only screen and (max-width: 768px) {
+  .dashboard .menu.closed {
+    position: absolute;
+  }
+  .dashboard .logo img {
+    width: 8rem;
+  }
+
+  .dashboard .menu.closed {
+    left: -100px;
+  }
+
+  .dashboard .menu {
+    left: 0;
+    transition: all 0.3s ease;
+  }
+
+  .dashboard button.menu-toggle {
+    right: -60px;
+    top: 10px;
+  }
+}
