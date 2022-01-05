@@ -26,7 +26,7 @@ const ContactDetails = () => {
     let newList = contacts.filter((item) => item.id !== contact.id);
     setContacts(newList);
     const deleteOptions = { method: "DELETE" };
-    let response = fetch(`${apiURL}/${id}`, deleteOptions);
+    fetch(`${apiURL}/${id}`, deleteOptions);
     alert("contact deleted");
   };
 
