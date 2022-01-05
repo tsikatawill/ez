@@ -24,7 +24,7 @@ const EditContact = () => {
         phone_number: data.name,
       };
     },
-    []
+    [id]
   );
 
   const handleChange = (e) => {

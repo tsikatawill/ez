@@ -17,7 +17,7 @@ const ViewContacts = () => {
         console.log(contacts);
       }
     },
-    []
+    [contacts]
   );
 
   return (

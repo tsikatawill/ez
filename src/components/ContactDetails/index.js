@@ -20,7 +20,7 @@ const ContactDetails = () => {
       setContacts(data);
       console.log(contacts);
     },
-    []
+    [contacts]
   );
 
   const deleteContact = async () => {
@@ -44,7 +44,7 @@ const ContactDetails = () => {
       setContact(data);
       setLoading(false);
     },
-    []
+    [id]
   );
   return (
     <div className="container py-5">
