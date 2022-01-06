@@ -1,10 +1,11 @@
 import React from "react";
+import apiRequest from "../apiRequest";
+import { apiURL } from "../apiURL";
 
 const AddContact = () => {
   const [contact, setContact] = React.useState({
     name: "",
     phone_number: "",
-    image: "",
   });
 
   const handleChange = (e) => {
@@ -13,11 +14,12 @@ const AddContact = () => {
     setContact({ ...contact, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let { name, phone_number } = contact;
     if (name && phone_number) {
       const newContact = { ...contact, id: new Date().getTime().toString() };
+
       const postConfig = {
         method: "POST",
         headers: {
@@ -25,15 +27,16 @@ const AddContact = () => {
         },
         body: JSON.stringify(newContact),
       };
-      const post = async () => {
-        let response = await fetch(
-          "http://localhost:3002/contacts",
-          postConfig
-        );
-        console.log(response.status, response);
-      };
-      post();
+
+      const result = await apiRequest(apiURL, postConfig);
+      if (result) console.log(result);
+
       alert("Contact saved");
+      let name = document.getElementById('name')
+      let phone_number = document.getElementById('phone_number')
+      name.value= ''
+      phone_number.value= ''
+
     } else {
       alert("Please complete the form");
     }

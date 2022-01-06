@@ -5,58 +5,71 @@ import { apiURL } from "../apiURL";
 
 const ViewContacts = () => {
   const [contacts, setContacts] = React.useState([]);
+  const [fetchError, setFetchError] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
 
-  React.useEffect(
-    () => async () => {
-      let response = await fetch(apiURL);
-      let data = await response.json();
-      if (response.status < 300) {
-        if (data.length > 0) {
-          setContacts(data);
-        }
-        console.log(contacts);
+  React.useEffect(() => {
+    const getContacts = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(apiURL);
+        const data = await response.json();
+        if (!response.ok) throw Error("Error during fetch operation");
+        setContacts(data);
+        setFetchError(null);
+      } catch (err) {
+        setFetchError(err.message);
+        console.log(fetchError);
+      } finally {
+        setLoading(false);
       }
-    },
-    [contacts]
-  );
+    };
+
+    (async () => await getContacts())();
+  }, [fetchError]);
 
   return (
     <div className="container py-5">
       <div className="section-header text-center">
         <h1>Your contact list</h1>
       </div>
-      <ul
-        className="contacts"
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-          gap: "1rem",
-        }}
-      >
-        {contacts.length > 0 ? (
-          contacts.map((contact) => {
-            return (
-              <li className="text-dark" key={contact.id}>
-                <Link to={`/dashboard/contacts/${contact.id}`}>
-                  <ContactCard {...contact} />
-                </Link>
-              </li>
-            );
-          })
-        ) : (
-          <div className="text-center">
-            <p>
-              Oops! Your contact list is looking a little empty. Wanna add some
-              contacts?
-            </p>
-            <Link to="/dashboard/add-contact" className="cta">
-              <button className="btn bg--primary btn-rounded">
-                Add contact
-              </button>
-            </Link>
-          </div>
-        )}
-      </ul>
+
+      {loading ? (
+        <p className="text-center">Grabbing contacts...</p>
+      ) : (
+        <ul
+          className="contacts"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+            gap: "1rem",
+          }}
+        >
+          {contacts.length > 0 ? (
+            contacts.map((contact) => {
+              return (
+                <li className="text-dark" key={contact.id}>
+                  <Link to={`/dashboard/contacts/${contact.id}`}>
+                    <ContactCard {...contact} />
+                  </Link>
+                </li>
+              );
+            })
+          ) : (
+            <div className="text-center">
+              <p>
+                Oops! Your contact list is looking a little empty. Wanna add
+                some contacts?
+              </p>
+              <Link to="/dashboard/add-contact" className="cta">
+                <button className="btn bg--primary btn-rounded">
+                  Add contact
+                </button>
+              </Link>
+            </div>
+          )}
+        </ul>
+      )}
     </div>
   );
 };

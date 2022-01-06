@@ -13,15 +13,15 @@ const ContactDetails = () => {
   const { id } = useParams();
   const [contacts, setContacts] = React.useState([]);
 
-  React.useEffect(
-    () => async () => {
-      let response = await fetch(apiURL);
+  React.useEffect(() => {
+    const getContact = async () => {
+      let response = await fetch(`${apiURL}/${id}`);
       let data = await response.json();
-      setContacts(data);
-      console.log(contacts);
-    },
-    [contacts]
-  );
+
+      setContact(data);
+    };
+    (async () => await getContact())();
+  }, [id]);
 
   const deleteContact = async () => {
     let newList = contacts.filter((item) => item.id !== contact.id);
